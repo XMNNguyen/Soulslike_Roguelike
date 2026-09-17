@@ -8,4 +8,6 @@
 
 [node name="EntityLayer" type="Node3D" parent="World" unique_id=59056359]
 
+[node name="EffectsLayer" type="Node3D" parent="World" unique_id=1117609031]
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=625119271]
