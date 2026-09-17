@@ -3,7 +3,14 @@
 [ext_resource type="Script" uid="uid://b6d62q1hlvjrs" path="res://Scripts/Entities/Player/player.gd" id="1_kkvp2"]
 [ext_resource type="PackedScene" uid="uid://c75phlfhahanb" path="res://Assets/Player_Model/player_rig.glb" id="2_4ffj5"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_eed4v"]
+size = Vector3(0.26208496, 1.6176758, 0.3256836)
+
 [node name="Player" type="CharacterBody3D" unique_id=1758103362]
 script = ExtResource("1_kkvp2")
 
 [node name="PlayerRig" parent="." unique_id=151642415 instance=ExtResource("2_4ffj5")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2126521635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77083594, 0)
+shape = SubResource("BoxShape3D_eed4v")
