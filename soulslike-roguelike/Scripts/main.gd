@@ -12,6 +12,7 @@ const DEBUG_LEVEL : String = "NOTE: MAKE A LEVEL AND PUT UID HERE"
 const PLAYER_UID : String = "uid://l82p60spqam2"
 
 var player : Player = null
+var current_level : BaseLevel = null
 
 # -----------------------------------
 # WORLD ROOT NODES
@@ -30,7 +31,7 @@ var player : Player = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_init_player()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +42,7 @@ func _process(delta: float) -> void:
 # Helper method to load the player scene safely
 func _init_player() -> void:
 	# Load player scene
-	var player_scene : PackedScene = Resource.load(PLAYER_UID) as PackedScene
+	var player_scene : PackedScene = ResourceLoader.load(PLAYER_UID) as PackedScene
 	if player_scene == null:
 		push_error("COULD NOT LOAD PLAYER SCENE: " + PLAYER_UID)
 		return
@@ -52,12 +53,45 @@ func _init_player() -> void:
 		push_error("PLAYER SCENE N/A OR COULD NOT INSTANTIATE")
 		return
 	
+	entity_root.add_child(player)
+	
 
-# TODO:
-# Add the load level method where we
-# 1. Unload previous level (if needed)
-# 2. Instantiate level scene safely
-# 3. Add level to level root
-# 4. Set up player spawn and camera
+# Helper method to safely load level
 func _load_level(level_scene : String) -> void:
-	pass
+	_defered_load_level.call_deferred(level_scene)
+
+
+func _defered_load_level(level_uid : String) -> void:
+	# unload previous level
+	if current_level != null:
+		current_level.queue_free()
+		current_level = null
+		
+	await get_tree().process_frame
+	
+	# load and instantiate the level scene
+	var level_scene : PackedScene = ResourceLoader.load(level_uid) as PackedScene
+	if level_scene == null:
+		push_error("COULD NOT LOAD LEVEL SCENE " + level_uid)
+		return
+	
+	current_level = level_scene.instantiate() as BaseLevel
+	if current_level == null:
+		push_error("LEVEL SCENE N/A OR COULD NOT INSTANTIATE")
+		return
+	
+	level_root.add_child(current_level)
+	
+	# make sure to let level load before accessing it
+	await get_tree().process_frame
+
+func place_player_at_spawn() -> void:
+	if player == null:
+		push_error("CAN NOT PLACE PLAYER, DOES NOT EXIST")
+		return
+	
+	if current_level == null:
+		push_error("CAN NOT ACCESS LEVEL, LEVEL DOES NOT EXIST")
+		return
+	
+	player.global_position = current_level.get_player_spawn()
