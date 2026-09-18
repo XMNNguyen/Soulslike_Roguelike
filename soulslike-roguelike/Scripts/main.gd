@@ -9,7 +9,9 @@ class_name Main
 
 # NOTE: Add any level data here as well
 const DEBUG_LEVEL : String = "NOTE: MAKE A LEVEL AND PUT UID HERE"
-const player_uid : String = "uid://l82p60spqam2"
+const PLAYER_UID : String = "uid://l82p60spqam2"
+
+var player : Player = null
 
 # -----------------------------------
 # WORLD ROOT NODES
@@ -25,6 +27,7 @@ const player_uid : String = "uid://l82p60spqam2"
 
 @onready var hud_root : Node3D = $HUD
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -35,19 +38,26 @@ func _process(delta: float) -> void:
 	pass
 
 
-# TODO:
-# Add the init player method where we
-# 1. Safely take player uid and instantiate as a scene
-# 2. Add player to entity layer
-# 3. Send player to player spawn point after level loads
+# Helper method to load the player scene safely
 func _init_player() -> void:
-	pass
+	# Load player scene
+	var player_scene : PackedScene = Resource.load(PLAYER_UID) as PackedScene
+	if player_scene == null:
+		push_error("COULD NOT LOAD PLAYER SCENE: " + PLAYER_UID)
+		return
 	
+	# Instantiate player
+	player = player_scene.instantiate() as Player
+	if player == null:
+		push_error("PLAYER SCENE N/A OR COULD NOT INSTANTIATE")
+		return
+	
+
 # TODO:
 # Add the load level method where we
 # 1. Unload previous level (if needed)
 # 2. Instantiate level scene safely
 # 3. Add level to level root
-# 4. 
+# 4. Set up player spawn and camera
 func _load_level(level_scene : String) -> void:
 	pass
