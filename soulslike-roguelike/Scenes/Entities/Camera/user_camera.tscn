@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dckhbf66n84ky"]
+
+[ext_resource type="Script" uid="uid://ccbkgpket7ga4" path="res://Scripts/Entities/Camera/user_camera.gd" id="1_5isc7"]
+
+[node name="UserCamera" type="Node3D" unique_id=200592742]
+script = ExtResource("1_5isc7")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1261018848]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Pivot" unique_id=768461349]
+
+[node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D" unique_id=1985725044]

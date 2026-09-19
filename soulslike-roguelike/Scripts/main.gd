@@ -8,7 +8,7 @@ class_name Main
 # -----------------------------------
 
 # NOTE: Add any level data here as well
-const DEBUG_LEVEL : String = "NOTE: MAKE A LEVEL AND PUT UID HERE"
+const DEBUG_LEVEL : String = "uid://dwu1qbbbpr0ui"
 const PLAYER_UID : String = "uid://l82p60spqam2"
 
 var player : Player = null
@@ -26,13 +26,13 @@ var current_level : BaseLevel = null
 # UI ROOT NODES
 # -----------------------------------
 
-@onready var hud_root : Node3D = $HUD
+@onready var hud_root : CanvasLayer = $HUD
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_init_player()
-
+	_load_level(DEBUG_LEVEL)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -84,6 +84,7 @@ func _defered_load_level(level_uid : String) -> void:
 	
 	# make sure to let level load before accessing it
 	await get_tree().process_frame
+
 
 func place_player_at_spawn() -> void:
 	if player == null:
