@@ -6,13 +6,18 @@ class_name UserCamera
 @onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
 @onready var camera : Camera3D = $Pivot/SpringArm3D/Camera3D
 
-@export var sensitivity : float = 0.5
+@export var sensitivity : float = 0.01
 @export var tilt_limit : float = 90
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func _process(delta: float) -> void:
+	if target != null:
+		global_position = target.global_position
 
 
 func _input(event: InputEvent) -> void:

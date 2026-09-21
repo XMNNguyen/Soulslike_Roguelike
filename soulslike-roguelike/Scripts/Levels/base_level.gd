@@ -5,3 +5,5 @@ class_name BaseLevel
 @abstract func get_player_spawn() -> Vector3
 
 @abstract func get_player_camera() -> BaseCamera
+
+@abstract func assign_camera(target : Node3D) -> void

@@ -83,7 +83,10 @@ func _defered_load_level(level_uid : String) -> void:
 	level_root.add_child(current_level)
 	
 	# make sure to let level load before accessing it
+	# place player and camera in correct possitions
 	await get_tree().process_frame
+	place_player_at_spawn()
+	attach_camera_to_player()
 
 
 func place_player_at_spawn() -> void:
@@ -96,3 +99,18 @@ func place_player_at_spawn() -> void:
 		return
 	
 	player.global_position = current_level.get_player_spawn()
+
+
+func attach_camera_to_player() -> void:
+	if current_level == null:
+		push_error("CAN NOT ATTACH CAMERA, LEVEL NOT LOADED")
+		return
+	
+	if player == null:
+		push_error("CAN NOT ATTACH CAMERA, PLAYER NOT LOADED")
+	
+	if current_level.get_player_camera() == null:
+		push_error("CAMERA DOES NOT EXIST")
+		return
+	
+	current_level.assign_camera(player)

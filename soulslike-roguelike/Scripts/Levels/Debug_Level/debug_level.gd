@@ -11,3 +11,7 @@ func get_player_spawn() -> Vector3:
 
 func get_player_camera() -> BaseCamera:
 	return user_camera
+
+
+func assign_camera(target : Node3D) -> void:
+	user_camera.target = target
