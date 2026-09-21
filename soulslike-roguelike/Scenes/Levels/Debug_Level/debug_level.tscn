@@ -21,9 +21,14 @@ script = ExtResource("1_3ri1k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.325781, 0)
 mesh = SubResource("CylinderMesh_eed4v")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1877787752]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5001221, 0)
-shape = SubResource("CylinderShape3D_eed4v")
-
 [node name="PlayerSpawn" type="Marker3D" parent="." unique_id=540243922]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9800959, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1498262541]
+transform = Transform3D(1, 0, 0, 0, -0.4379125, 0.89901763, 0, -0.89901763, -0.4379125, 0, 3.442146, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=664876883]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1877787752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5001221, 0)
+shape = SubResource("CylinderShape3D_eed4v")

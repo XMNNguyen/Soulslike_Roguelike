@@ -8,5 +8,6 @@ script = ExtResource("1_5isc7")
 [node name="Pivot" type="Node3D" parent="." unique_id=1261018848]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Pivot" unique_id=768461349]
+spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D" unique_id=1985725044]

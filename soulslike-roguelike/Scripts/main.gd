@@ -113,4 +113,4 @@ func attach_camera_to_player() -> void:
 		push_error("CAMERA DOES NOT EXIST")
 		return
 	
-	current_level.assign_camera(player)
+	current_level.assign_camera(player.head_pos)
