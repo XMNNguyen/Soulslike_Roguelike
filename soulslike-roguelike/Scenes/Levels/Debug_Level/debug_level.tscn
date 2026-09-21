@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dwu1qbbbpr0ui"]
 
 [ext_resource type="Script" uid="uid://mpjhy21ybpfe" path="res://Scripts/Levels/Debug_Level/debug_level.gd" id="1_3ri1k"]
+[ext_resource type="PackedScene" uid="uid://dckhbf66n84ky" path="res://Scenes/Entities/Camera/user_camera.tscn" id="2_h7oiu"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_eed4v"]
 top_radius = 28.066406
@@ -13,6 +14,8 @@ radius = 28.493652
 
 [node name="DebugLevel" type="Node3D" unique_id=1596019205]
 script = ExtResource("1_3ri1k")
+
+[node name="UserCamera" parent="." unique_id=200592742 instance=ExtResource("2_h7oiu")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=346870273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.325781, 0)

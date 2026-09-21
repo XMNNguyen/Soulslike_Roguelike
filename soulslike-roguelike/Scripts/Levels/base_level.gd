@@ -4,4 +4,4 @@ class_name BaseLevel
 
 @abstract func get_player_spawn() -> Vector3
 
-@abstract func get_player_camera() -> Camera3D
+@abstract func get_player_camera() -> BaseCamera

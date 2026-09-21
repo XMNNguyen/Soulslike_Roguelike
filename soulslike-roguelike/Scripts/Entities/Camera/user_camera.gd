@@ -6,8 +6,8 @@ class_name UserCamera
 @onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
 @onready var camera : Camera3D = $Pivot/SpringArm3D/Camera3D
 
-@export var sensitivity : Float = 0.5
-@export var tilt_limit : Float = 90
+@export var sensitivity : float = 0.5
+@export var tilt_limit : float = 90
 
 
 # Called when the node enters the scene tree for the first time.
