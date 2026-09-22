@@ -1,5 +1,5 @@
 shader_type spatial;
-
+render_mode blend_mix, depth_draw_opaque, cull_back, unshaded;
 /*
 	Debug Shader
 	Displays mesh as a black and white checkerboard
