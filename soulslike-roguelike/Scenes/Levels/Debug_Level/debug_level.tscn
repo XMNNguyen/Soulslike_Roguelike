@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mpjhy21ybpfe" path="res://Scripts/Levels/Debug_Level/debug_level.gd" id="1_3ri1k"]
 [ext_resource type="PackedScene" uid="uid://dckhbf66n84ky" path="res://Scenes/Entities/Camera/user_camera.tscn" id="2_h7oiu"]
-[ext_resource type="Shader" uid="uid://rt02l858e8jd" path="res://Shaders/debug.gdshader" id="3_ufrrj"]
+[ext_resource type="Shader" uid="uid://i8pcudaw1irw" path="res://Shaders/debug/uv_debug.gdshader" id="3_ufrrj"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_eed4v"]
 top_radius = 28.066406
@@ -12,8 +12,6 @@ height = 0.65771484
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7oiu"]
 render_priority = 0
 shader = ExtResource("3_ufrrj")
-shader_parameter/scale = 5.0000002375
-shader_parameter/grey_scale = 0.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eed4v"]
 height = 0.99975586
