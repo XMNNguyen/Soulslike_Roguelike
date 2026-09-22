@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cp7kilmeekngk"]
+
+[ext_resource type="Script" uid="uid://frsglu2ihc3q" path="res://Scripts/Entities/Nodes/ControllerNodes/manual_movement_controller.gd" id="1_l47k8"]
+
+[node name="InputMovementController" type="Node" unique_id=728575245]
+script = ExtResource("1_l47k8")
+metadata/_custom_type_script = "uid://fcr1m0aw7mkb"

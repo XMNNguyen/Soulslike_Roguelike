@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b6d62q1hlvjrs" path="res://Scripts/Entities/Player/player.gd" id="1_kkvp2"]
 [ext_resource type="PackedScene" uid="uid://c75phlfhahanb" path="res://Assets/Player_Model/player_rig.glb" id="2_4ffj5"]
+[ext_resource type="PackedScene" uid="uid://cp7kilmeekngk" path="res://Scenes/Entities/Nodes/ControllerNodes/InputMovementController.tscn" id="2_22fhq"]
+[ext_resource type="PackedScene" uid="uid://c5uxp03grsd4i" path="res://Scenes/Entities/Nodes/ControllerNodes/JumpController.tscn" id="3_fcpig"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eed4v"]
 size = Vector3(0.26208496, 1.6176758, 0.3256836)
@@ -9,11 +11,19 @@ size = Vector3(0.26208496, 1.6176758, 0.3256836)
 [node name="Player" type="CharacterBody3D" unique_id=1758103362]
 script = ExtResource("1_kkvp2")
 
+[node name="Componants" type="Node" parent="." unique_id=2110396936]
+
+[node name="InputMovementController" parent="Componants" unique_id=728575245 node_paths=PackedStringArray("target") instance=ExtResource("2_22fhq")]
+target = NodePath("../..")
+
+[node name="JumpController" parent="Componants" unique_id=1430971260 node_paths=PackedStringArray("target") instance=ExtResource("3_fcpig")]
+target = NodePath("../..")
+
 [node name="PlayerRig" parent="." unique_id=151642415 instance=ExtResource("2_4ffj5")]
+
+[node name="HeadPos" type="Marker3D" parent="." unique_id=979801631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9158074, 0.06344712)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2126521635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.77083594, 0)
 shape = SubResource("BoxShape3D_eed4v")
-
-[node name="HeadPos" type="Marker3D" parent="." unique_id=979801631]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9158074, 0.06344712)

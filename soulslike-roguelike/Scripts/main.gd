@@ -114,3 +114,4 @@ func attach_camera_to_player() -> void:
 		return
 	
 	current_level.assign_camera(player.head_pos)
+	player.cur_camera =  current_level.get_player_camera()

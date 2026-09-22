@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5uxp03grsd4i"]
+
+[ext_resource type="Script" uid="uid://fcr1m0aw7mkb" path="res://Scripts/Entities/Nodes/ControllerNodes/3d_soulslike_controller.gd" id="1_jb7lu"]
+
+[node name="JumpController" type="Node3D" unique_id=1430971260]
+script = ExtResource("1_jb7lu")
