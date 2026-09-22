@@ -5,17 +5,22 @@ shader_type spatial;
 	Displays mesh as a black and white checkerboard
 */
 
+uniform float scale : hint_range(0.0, 50.0) = 20.0;
+uniform float grey_scale : hint_range(0.0, 1.0) = 0.4;
+
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	vec2 uv_scale = UV * 10.0;
+	vec2 uv_scale = UV * scale;
 	
 	// determines what tile a pixel lands on
 	float checker = mod(floor(uv_scale.x) + floor(uv_scale.y), 2.0);
 	
-	ALBEDO = vec3(checker);
+	float final_color = clamp(checker, grey_scale, 1.0);
+	
+	ALBEDO = vec3(final_color);
 }
 
 //void light() {
