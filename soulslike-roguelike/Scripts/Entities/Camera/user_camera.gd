@@ -22,14 +22,8 @@ func _physics_process(delta: float) -> void:
 		return 
 	
 	# handle updating the camera
-	global_position = lerp(global_position, target.global_position, update_weight)
-	
-	var direction := camera.global_position - target.global_position
-	direction.y = 0.0
-
-	var orbit := atan2(direction.x, direction.z)
-	spring_arm.rotation.y = orbit
-
+	global_position = target.global_position
+	camera.look_at(target.global_position)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
