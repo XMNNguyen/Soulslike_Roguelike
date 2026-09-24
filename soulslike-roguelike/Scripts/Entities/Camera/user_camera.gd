@@ -27,24 +27,27 @@ func _physics_process(delta: float) -> void:
 	var orbit := Input.get_axis("left", "right")
 	var forward := Input.get_axis("forward", "backward")
 	
-	if forward: 
-		forward_weight = update_weight
-		
 	if orbit: 
 		orbit_weight = update_weight
+	else:
+		orbit_weight = lerpf(orbit_weight, 0, update_weight)
 	
 	# handle updating the camera
-	if forward_weight:
-		global_position = lerp(global_position, target.global_position, forward_weight)
+	global_position = lerp(global_position, target.global_position, update_weight)
 	
 	if orbit_weight:
-		var target_rotation := global_transform.looking_at(target.global_position, Vector3.UP)
-		spring_arm.basis = spring_arm.basis.slerp(target_rotation.basis, orbit_weight)
+		var direction := target.global_position - spring_arm.global_position
+		direction.y = 0
+		
+		var target_yaw := atan2(direction.x, direction.z)
+		spring_arm.rotation.y = lerp_angle(spring_arm.rotation.y, target_yaw, orbit_weight)
 	
 	if global_position == target.global_position:
 		forward_weight = 0
 		orbit_weight = 0
-
+	
+	print("ORBIT WEIGHT: " + str(orbit_weight))
+	print("POSITION " + str(global_position) + "TARGET " + str(target.global_position))
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		spring_arm.rotation.x -= event.relative.y * sensitivity
