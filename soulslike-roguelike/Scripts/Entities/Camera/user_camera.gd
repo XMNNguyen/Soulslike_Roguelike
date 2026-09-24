@@ -10,8 +10,6 @@ class_name UserCamera
 @export var tilt_limit : float = 70
 @export var update_weight : float = 0.03
 
-var orbit_weight : float = 0
-var forward_weight : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,31 +21,16 @@ func _physics_process(delta: float) -> void:
 	if target == null:
 		return 
 	
-	# get input axis for orbit directions and forward movement directions and check them
-	var orbit := Input.get_axis("left", "right")
-	var forward := Input.get_axis("forward", "backward")
-	
-	if orbit: 
-		orbit_weight = update_weight
-	else:
-		orbit_weight = lerpf(orbit_weight, 0, update_weight)
-	
 	# handle updating the camera
 	global_position = lerp(global_position, target.global_position, update_weight)
 	
-	if orbit_weight:
-		var direction := target.global_position - spring_arm.global_position
-		direction.y = 0
-		
-		var target_yaw := atan2(direction.x, direction.z)
-		spring_arm.rotation.y = lerp_angle(spring_arm.rotation.y, target_yaw, orbit_weight)
-	
-	if global_position == target.global_position:
-		forward_weight = 0
-		orbit_weight = 0
-	
-	print("ORBIT WEIGHT: " + str(orbit_weight))
-	print("POSITION " + str(global_position) + "TARGET " + str(target.global_position))
+	var direction := camera.global_position - target.global_position
+	direction.y = 0.0
+
+	var orbit := atan2(direction.x, direction.z)
+	spring_arm.rotation.y = orbit
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		spring_arm.rotation.x -= event.relative.y * sensitivity
