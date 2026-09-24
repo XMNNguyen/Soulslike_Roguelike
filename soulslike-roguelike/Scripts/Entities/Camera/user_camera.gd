@@ -40,6 +40,10 @@ func _physics_process(delta: float) -> void:
 	if orbit_weight:
 		var target_rotation := global_transform.looking_at(target.global_position, Vector3.UP)
 		spring_arm.basis = spring_arm.basis.slerp(target_rotation.basis, orbit_weight)
+	
+	if global_position == target.global_position:
+		forward_weight = 0
+		orbit_weight = 0
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
