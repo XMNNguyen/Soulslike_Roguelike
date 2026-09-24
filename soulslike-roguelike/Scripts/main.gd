@@ -34,6 +34,7 @@ func _ready() -> void:
 	_init_player()
 	_load_level(DEBUG_LEVEL)
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
