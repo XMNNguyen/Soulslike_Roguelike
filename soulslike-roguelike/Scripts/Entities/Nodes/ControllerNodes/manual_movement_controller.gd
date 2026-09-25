@@ -26,7 +26,7 @@ func run(delta : float) -> void:
 		right.y = 0.0
 
 		forward = forward.normalized()
-		right = calc_orbit_velocity(input_dir)
+		right = calc_orbit_velocity(input_dir, delta)
 
 		direction = right * input_dir.x + forward * -input_dir.y
 	else:
@@ -46,15 +46,23 @@ func run(delta : float) -> void:
 
 
 # helper function to orbit player around the camera
-func calc_orbit_velocity(input : Vector2) -> Vector3:
+# we return the orbit velocity
+func calc_orbit_velocity(input : Vector2, delta : float) -> Vector3:
 	var camera := get_viewport().get_camera_3d()
-	var camera_pos := camera.global_position
-	camera_pos.y = 0.0
-	var target_direction = camera_pos - target.global_position
-	var distance_to_target = target_direction.length()
 	
-	var alpha = (2 * asin(SPEED / (2 * distance_to_target)))
-	var d_vector = (target_direction.rotated(Vector3.UP, alpha) - target_direction).normalized()
+	var r1 := target.global_position - camera.global_position
+	r1.y = 0.0
 	
-	return d_vector
+	var radius = r1.length()
+	
+	var d = SPEED * delta * input.x
+	
+	var alpha := 2.0 * asin(d / (2.0 * radius))
+	
+	var r2 := r1.rotated(Vector3.UP, alpha)
+	
+	var orbit_pos = camera.global_position + r2
+	orbit_pos.y = target.global_position.y
+	
+	return (orbit_pos - target.global_position) / delta
 	
