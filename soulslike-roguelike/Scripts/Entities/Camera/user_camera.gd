@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	if (camera.global_position.distance_to(target.global_position) > spring_arm.spring_length ||
 		camera.global_position.distance_to(target.global_position) < spring_arm.spring_length - 1):
 		global_position = global_position.lerp(target.global_position, update_weight)
-		
+	
 	camera.look_at(target.global_position)
 
 func _input(event: InputEvent) -> void:

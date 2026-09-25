@@ -28,7 +28,7 @@ func run(delta : float) -> void:
 		forward = forward.normalized()
 		right = calc_orbit_velocity(input_dir, delta)
 
-		direction = right * input_dir.x + forward * -input_dir.y
+		direction = right + forward * -input_dir.y
 	else:
 		direction = Vector3(input_dir.x, 0.0, input_dir.y)
 
@@ -55,7 +55,7 @@ func calc_orbit_velocity(input : Vector2, delta : float) -> Vector3:
 	
 	var radius = r1.length()
 	
-	var d = SPEED * delta * input.x
+	var d = SPEED * delta * -input.x
 	
 	var alpha := 2.0 * asin(d / (2.0 * radius))
 	
