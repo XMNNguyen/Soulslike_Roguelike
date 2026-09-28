@@ -23,6 +23,7 @@ radius = 28.493652
 script = ExtResource("1_3ri1k")
 
 [node name="UserCamera" parent="." unique_id=200592742 instance=ExtResource("2_h7oiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7562312, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=346870273]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0015296936, -0.2747804, 0.00061798096)
@@ -41,3 +42,6 @@ shadow_enabled = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1877787752]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5001221, 0)
 shape = SubResource("CylinderShape3D_eed4v")
+
+[node name="DebugCamera" type="Camera3D" parent="." unique_id=355766288]
+transform = Transform3D(1, 0, 0, 0, 0.019866288, 0.99980265, 0, -0.99980265, 0.019866288, 0, 26.20837, 0)

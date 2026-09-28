@@ -3,7 +3,7 @@ class_name DebugLevel
 
 @onready var player_spawn : Marker3D = $PlayerSpawn
 @onready var user_camera : BaseCamera = $UserCamera
-
+@onready var debug_camera : Camera3D = $DebugCamera
 
 func get_player_spawn() -> Vector3:
 	return player_spawn.global_position
@@ -15,3 +15,4 @@ func get_player_camera() -> BaseCamera:
 
 func assign_camera(target : Node3D) -> void:
 	user_camera.target = target
+	#debug_camera.make_current()

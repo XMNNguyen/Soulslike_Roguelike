@@ -11,3 +11,8 @@ script = ExtResource("1_5isc7")
 spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D" unique_id=1985725044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5562176, 1.9189181)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Pivot/SpringArm3D/Camera3D" unique_id=2081252035]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1160670051]
