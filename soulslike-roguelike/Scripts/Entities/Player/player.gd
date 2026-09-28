@@ -4,7 +4,7 @@ class_name Player
 @onready var head_pos : Marker3D = $HeadPos
 @onready var componants : Array = $Componants.get_children()
 
-var cur_camera : BaseCamera = null
+@export var cur_camera : BaseCamera = null
 
 func _physics_process(delta: float) -> void:
 	# handle all physics and stat based componants here

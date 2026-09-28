@@ -3,15 +3,20 @@
 [ext_resource type="Script" uid="uid://b6d62q1hlvjrs" path="res://Scripts/Entities/Player/player.gd" id="1_kkvp2"]
 [ext_resource type="PackedScene" uid="uid://c75phlfhahanb" path="res://Assets/Player_Model/player_rig.glb" id="2_4ffj5"]
 [ext_resource type="PackedScene" uid="uid://cp7kilmeekngk" path="res://Scenes/Entities/Nodes/ControllerNodes/InputMovementController.tscn" id="2_22fhq"]
+[ext_resource type="PackedScene" uid="uid://dckhbf66n84ky" path="res://Scenes/Entities/Camera/user_camera.tscn" id="2_fcpig"]
 [ext_resource type="PackedScene" uid="uid://c5uxp03grsd4i" path="res://Scenes/Entities/Nodes/ControllerNodes/JumpController.tscn" id="3_fcpig"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eed4v"]
 size = Vector3(0.26208496, 1.6176758, 0.3256836)
 
-[node name="Player" type="CharacterBody3D" unique_id=1758103362]
+[node name="Player" type="CharacterBody3D" unique_id=1758103362 node_paths=PackedStringArray("cur_camera")]
 script = ExtResource("1_kkvp2")
+cur_camera = NodePath("Componants/UserCamera")
 
 [node name="Componants" type="Node" parent="." unique_id=2110396936]
+
+[node name="UserCamera" parent="Componants" unique_id=200592742 node_paths=PackedStringArray("target") instance=ExtResource("2_fcpig")]
+target = NodePath("../..")
 
 [node name="InputMovementController" parent="Componants" unique_id=728575245 node_paths=PackedStringArray("target") instance=ExtResource("2_22fhq")]
 target = NodePath("../..")

@@ -87,7 +87,7 @@ func _defered_load_level(level_uid : String) -> void:
 	# place player and camera in correct possitions
 	await get_tree().process_frame
 	place_player_at_spawn()
-	attach_camera_to_player()
+	#attach_camera_to_player()
 
 
 func place_player_at_spawn() -> void:

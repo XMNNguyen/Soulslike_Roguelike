@@ -7,3 +7,6 @@ class_name BaseCamera
 # getter method for getting the camera target
 func get_target() -> Node3D:
 	return target
+
+func get_camera() -> Camera3D:
+	return
