@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	previous_player_position = target.global_position
 
 	# Always face the player.
-	var look_direction := target.global_position - camera.global_position
+	var look_direction := global_position
 
 	if look_direction.length_squared() > 0.001:
 		var desired_rotation := Basis.looking_at(

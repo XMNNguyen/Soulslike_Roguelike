@@ -15,4 +15,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5562176, 1.9189181)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Pivot/SpringArm3D/Camera3D" unique_id=2081252035]
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Pivot" unique_id=1412460164]
+
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1160670051]
