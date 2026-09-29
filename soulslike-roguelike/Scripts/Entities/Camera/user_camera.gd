@@ -3,8 +3,8 @@ class_name UserCamera
 
 
 @onready var pivot : Node3D = $Pivot
-@onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
-@onready var camera : Camera3D = $Pivot/SpringArm3D/Camera3D
+@onready var spring_arm : SpringArm3D = $SpringArm3D
+@onready var camera : Camera3D = $SpringArm3D/Camera3D
 
 @export var sensitivity : float = 0.01
 @export var tilt_limit : float = 70.0
@@ -27,6 +27,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if target == null:
 		return
+	
+	
+	pivot.global_position = target.global_position
 	
 	camera.look_at(target.global_position)
 
