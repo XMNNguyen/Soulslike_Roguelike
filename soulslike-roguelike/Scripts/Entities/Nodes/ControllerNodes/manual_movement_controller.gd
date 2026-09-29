@@ -15,7 +15,7 @@ func run(delta : float) -> void:
 	var direction := Vector3(input_dir.x, 0.0, input_dir.y)
 	
 	# make sure to rotate the basis in the correct direction if there is a camera
-	var camera := get_viewport().get_camera_3d()
+	var camera : Camera3D = target.cur_camera.camera
 
 	if camera:
 		var forward := -camera.global_transform.basis.z # we use negative to have character facing away from camera
@@ -48,7 +48,7 @@ func run(delta : float) -> void:
 # helper function to orbit player around the camera
 # we return the orbit velocity
 func calc_orbit_velocity(input : Vector2, delta : float) -> Vector3:
-	var camera := get_viewport().get_camera_3d()
+	var camera : Camera3D = target.cur_camera.camera
 	
 	var r1 := target.global_position - camera.global_position
 	r1.y = 0.0

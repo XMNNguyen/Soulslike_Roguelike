@@ -5,6 +5,11 @@ class_name DebugLevel
 @onready var user_camera : BaseCamera = $UserCamera
 @onready var debug_camera : Camera3D = $DebugCamera
 
+
+func _ready() -> void:
+	debug_camera.make_current()
+	pass
+
 func get_player_spawn() -> Vector3:
 	return player_spawn.global_position
 
