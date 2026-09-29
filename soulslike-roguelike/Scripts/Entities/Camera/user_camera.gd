@@ -4,7 +4,7 @@ class_name UserCamera
 
 @onready var pivot : Node3D = $Pivot
 @onready var spring_arm : SpringArm3D = $SpringArm3D
-@onready var camera : Camera3D = $SpringArm3D/Camera3D
+@onready var camera : Camera3D = $Camera3D
 
 @export var sensitivity : float = 0.01
 @export var tilt_limit : float = 70.0
@@ -29,12 +29,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	if event is InputEventMouseMotion:
 		spring_arm.rotation.x -= event.relative.y * sensitivity
 		spring_arm.rotation.y -= event.relative.x * sensitivity
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -deg_to_rad(tilt_limit), deg_to_rad(tilt_limit))
-	else:
-		spring_arm.look_at(pivot.global_position)
 
 
 func get_camera() -> Camera3D:
@@ -47,7 +46,7 @@ func free_move(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	
 	if input_dir.y:
-		spring_arm.global_position = pivot.global_position
+		camera.global_position = pivot.global_position
 	
 	pivot.global_position = lerp(pivot.global_position, target.global_position, 0.5)
 	# always have camera look at the target
