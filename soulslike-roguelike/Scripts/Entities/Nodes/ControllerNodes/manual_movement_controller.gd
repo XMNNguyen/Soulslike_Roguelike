@@ -24,14 +24,16 @@ func run(delta : float) -> void:
 		# Ignore camera pitch
 		forward.y = 0.0
 		right.y = 0.0
-
+		
+		# calculate both the forward and orbit velocity
 		forward = forward.normalized()
 		right = calc_orbit_velocity(input_dir, delta)
-
+		
 		direction = right + forward * -input_dir.y
 	else:
 		direction = Vector3(input_dir.x, 0.0, input_dir.y)
-
+	
+	# move our player based on if we have a velocity or not
 	if direction:
 		direction = direction.normalized()
 
