@@ -3,12 +3,13 @@ class_name UserCamera
 
 
 @onready var pivot : Node3D = $Pivot
-@onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
+#@onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
 @onready var camera : Camera3D = $Camera3D
-@onready var follow_point : Node3D = $Pivot/SpringArm3D/FollowPoint
+@onready var follow_point : Node3D = $FollowPoint
 
 @export var sensitivity : float = 0.01
 @export var tilt_limit : float = 70.0
+@export var camera_offset : float = 5.0
 
 @export var follow_speed : float = 5.0
 @export var look_speed : float = 5.0
@@ -31,9 +32,10 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		spring_arm.rotation.x -= event.relative.y * sensitivity
-		spring_arm.rotation.y -= event.relative.x * sensitivity
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -deg_to_rad(tilt_limit), deg_to_rad(tilt_limit))
+		pass
+		#spring_arm.rotation.x -= event.relative.y * sensitivity
+		#spring_arm.rotation.y -= event.relative.x * sensitivity
+		#spring_arm.rotation.x = clamp(spring_arm.rotation.x, -deg_to_rad(tilt_limit), deg_to_rad(tilt_limit))
 
 
 func get_camera() -> Camera3D:
@@ -44,6 +46,16 @@ func free_move(delta: float) -> void:
 	if target == null:
 		return 
 	
-	pivot.global_position = lerp(pivot.global_position, target.global_position, 0.5)
+	pivot.global_position = target.global_position
+	
+	# calculate the distance from the camera and adjust camera position accordingly
+	var distance_to := pivot.global_position - camera.global_position
+	print(distance_to.length_squared())
+	
+	if distance_to.length_squared() > 2:
+		camera.global_position += distance_to.length_squared() * pivot.global_position.direction_to(camera.global_position)
+		
+		
+	
 	# always have camera look at the target
 	camera.look_at(target.global_position)
