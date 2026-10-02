@@ -12,7 +12,7 @@ class_name UserCamera
 @export var camera_offset : float = 5.0
 
 @export var follow_speed : float = 5.0
-@export var look_speed : float = 5.0
+@export var look_speed : float = 60.0
 
 var previous_player_position : Vector3
 
@@ -46,16 +46,18 @@ func free_move(delta: float) -> void:
 	if target == null:
 		return 
 	
-	pivot.global_position = target.global_position
+	# calculate the distance in the forward direction of the camera
+	var forward := -(pivot.global_position - camera.global_position).normalized()
+	var distance_to := pivot.global_position - target.global_position
+	var forward_to := distance_to.dot(forward)
 	
 	# calculate the distance from the camera and adjust camera position accordingly
-	var distance_to := pivot.global_position - camera.global_position
-	print(distance_to.length_squared())
-	
-	if distance_to.length_squared() > 2:
-		camera.global_position += distance_to.length_squared() * pivot.global_position.direction_to(camera.global_position)
+	if abs(forward_to) > 0.001:
+		print(forward_to)
+		camera.global_position += forward_to * forward * look_speed * delta
+		print(camera.global_position)
 		
-		
+	pivot.global_position = target.global_position
 	
 	# always have camera look at the target
 	camera.look_at(target.global_position)
