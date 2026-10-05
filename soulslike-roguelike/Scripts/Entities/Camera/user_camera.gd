@@ -3,7 +3,6 @@ class_name UserCamera
 
 
 @onready var pivot : Node3D = $Pivot
-#@onready var spring_arm : SpringArm3D = $Pivot/SpringArm3D
 @onready var camera : Camera3D = $Camera3D
 @onready var follow_point : Node3D = $FollowPoint
 
@@ -14,7 +13,7 @@ class_name UserCamera
 @export var follow_speed : float = 60
 @export var look_speed : float = 30.0
 
-var previous_player_position : Vector3
+var previous_pivot_position : Vector3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,6 +49,7 @@ func free_move(delta: float) -> void:
 	var forward := (pivot.global_position - camera.global_position).normalized()
 	forward.y = (pivot.global_position - target.global_position).normalized().y
 	
+<<<<<<< HEAD
 	var distance_to := pivot.global_position - target.global_position
 	var forward_to := distance_to.dot(forward)
 	print(abs(forward_to))
@@ -61,5 +61,16 @@ func free_move(delta: float) -> void:
 		
 	pivot.global_position = target.global_position
 	
+=======
+	
+	
+	# calculate the distance from the camera and adjust camera position accordingly
+	var distance_to := pivot.global_position - previous_pivot_position
+	
+	if distance_to.length_squared() > 0.001:
+		
+		camera.global_position = pivot.global_position.direction_to(camera.global_position)
+		
+>>>>>>> 8be6564 (fixed camera rotation)
 	# always have camera look at the target
 	camera.look_at(target.global_position)
