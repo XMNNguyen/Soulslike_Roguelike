@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://royopvmtr5r3"]
+
+[ext_resource type="Script" uid="uid://d0bni6pqw4y01" path="res://Scripts/Entities/Nodes/Stats/entity)stats.gd" id="1_kruri"]
+
+[node name="Entity)stats" type="Node" unique_id=1403823700]
+script = ExtResource("1_kruri")
