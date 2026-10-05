@@ -13,7 +13,7 @@ class_name UserCamera
 @export var follow_speed : float = 60
 @export var look_speed : float = 30.0
 
-var previous_pivot_position : Vector3
+var previous_player_position : Vector3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,34 +43,33 @@ func get_camera() -> Camera3D:
 
 func free_move(delta: float) -> void:
 	if target == null:
-		return 
-	
-	# calculate the distance in the forward direction of the camera
-	var forward := (pivot.global_position - camera.global_position).normalized()
-	forward.y = (pivot.global_position - target.global_position).normalized().y
-	
-<<<<<<< HEAD
-	var distance_to := pivot.global_position - target.global_position
-	var forward_to := distance_to.dot(forward)
-	print(abs(forward_to))
-	# calculate the distance from the camera and adjust camera position accordingly
-	if forward_to:
-		print(forward_to * -forward * follow_speed * delta )
-		camera.global_position += forward_to * -forward * follow_speed * delta 
-		print(camera.global_position)
-		
+		return
+
+	var forward := pivot.global_position - camera.global_position
+	forward.y = 0.0
+
+	if forward.length_squared() < 0.001:
+		return
+
+	forward = forward.normalized()
+
+	# How much the player moved since the previous frame
+	var player_delta := target.global_position - previous_player_position
+
+	# Forward/backward movement
+	var forward_distance := player_delta.dot(forward)
+
+	# Vertical movement
+	var vertical_distance := player_delta.y
+
+	# Move camera by exactly those two components
+	camera.global_position += (
+		forward * forward_distance
+		+ Vector3.UP * vertical_distance
+	)
+
 	pivot.global_position = target.global_position
-	
-=======
-	
-	
-	# calculate the distance from the camera and adjust camera position accordingly
-	var distance_to := pivot.global_position - previous_pivot_position
-	
-	if distance_to.length_squared() > 0.001:
-		
-		camera.global_position = pivot.global_position.direction_to(camera.global_position)
-		
->>>>>>> 8be6564 (fixed camera rotation)
-	# always have camera look at the target
+
 	camera.look_at(target.global_position)
+
+	previous_player_position = target.global_position
