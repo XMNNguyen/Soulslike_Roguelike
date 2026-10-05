@@ -10,6 +10,7 @@ func _ready() -> void:
 	debug_camera.make_current() #NOTE: uncomment for when testing camera
 	pass
 
+
 func get_player_spawn() -> Vector3:
 	return player_spawn.global_position
 

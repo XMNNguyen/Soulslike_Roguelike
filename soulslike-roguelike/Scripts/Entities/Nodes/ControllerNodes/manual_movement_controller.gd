@@ -1,10 +1,10 @@
 extends ControllerNode
 class_name InputMovementController
 
-@export var SPEED : float = 4.5
+
 @export var TURN_WEIGHT : float = 0.5
 @export var target : CharacterBody3D = null
-
+@export var stats : EntityStats = null
 
 func run(delta : float) -> void:
 	if target == null:
@@ -37,14 +37,14 @@ func run(delta : float) -> void:
 	if direction:
 		direction = direction.normalized()
 
-		target.velocity.x = direction.x * SPEED
-		target.velocity.z = direction.z * SPEED
+		target.velocity.x = direction.x * stats.SPEED
+		target.velocity.z = direction.z * stats.SPEED
 
 		var target_basis := Basis.looking_at(-direction, Vector3.UP)
 		target.basis = target.basis.slerp(target_basis, TURN_WEIGHT)
 	else:
-		target.velocity.x = move_toward(target.velocity.x, 0.0, SPEED)
-		target.velocity.z = move_toward(target.velocity.z, 0.0, SPEED)
+		target.velocity.x = move_toward(target.velocity.x, 0.0, stats.SPEED)
+		target.velocity.z = move_toward(target.velocity.z, 0.0, stats.SPEED)
 
 
 # helper function to orbit player around the camera
@@ -57,7 +57,7 @@ func calc_orbit_velocity(input : Vector2, delta : float) -> Vector3:
 	
 	var radius = r1.length()
 	
-	var d = SPEED * delta * -input.x
+	var d = stats.SPEED * delta * -input.x
 	
 	var alpha := 2.0 * asin(d / (2.0 * radius))
 	

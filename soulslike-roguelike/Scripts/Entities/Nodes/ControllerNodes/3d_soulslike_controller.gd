@@ -2,9 +2,8 @@ extends ControllerNode
 class_name JumpController
 
 
-@export var JUMP_VELOCITY = 4.5
 @export var target : CharacterBody3D = null
-
+@export var stats : EntityStats = null
 
 func run(delta : float) -> void:
 	if target == null:
@@ -17,6 +16,6 @@ func run(delta : float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("dodge") and target.is_on_floor():
-		target.velocity.y = JUMP_VELOCITY
+		target.velocity.y = stats.JUMP_VELOCITY
 	
 	

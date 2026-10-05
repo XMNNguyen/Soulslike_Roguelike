@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7kilmeekngk" path="res://Scenes/Entities/Nodes/ControllerNodes/InputMovementController.tscn" id="2_22fhq"]
 [ext_resource type="PackedScene" uid="uid://dckhbf66n84ky" path="res://Scenes/Entities/Camera/user_camera.tscn" id="2_fcpig"]
 [ext_resource type="PackedScene" uid="uid://c5uxp03grsd4i" path="res://Scenes/Entities/Nodes/ControllerNodes/JumpController.tscn" id="3_fcpig"]
+[ext_resource type="PackedScene" uid="uid://royopvmtr5r3" path="res://Scenes/Entities/Nodes/Stats/entity)stats.tscn" id="5_y6hyn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eed4v"]
 size = Vector3(0.26208496, 1.6176758, 0.3256836)
@@ -18,11 +19,15 @@ cur_camera = NodePath("Componants/UserCamera")
 [node name="UserCamera" parent="Componants" unique_id=200592742 node_paths=PackedStringArray("target") instance=ExtResource("2_fcpig")]
 target = NodePath("../..")
 
-[node name="InputMovementController" parent="Componants" unique_id=728575245 node_paths=PackedStringArray("target") instance=ExtResource("2_22fhq")]
+[node name="InputMovementController" parent="Componants" unique_id=728575245 node_paths=PackedStringArray("target", "stats") instance=ExtResource("2_22fhq")]
 target = NodePath("../..")
+stats = NodePath("../Entity)stats")
 
-[node name="JumpController" parent="Componants" unique_id=1430971260 node_paths=PackedStringArray("target") instance=ExtResource("3_fcpig")]
+[node name="JumpController" parent="Componants" unique_id=1430971260 node_paths=PackedStringArray("target", "stats") instance=ExtResource("3_fcpig")]
 target = NodePath("../..")
+stats = NodePath("../Entity)stats")
+
+[node name="Entity)stats" parent="Componants" unique_id=1403823700 instance=ExtResource("5_y6hyn")]
 
 [node name="PlayerRig" parent="." unique_id=151642415 instance=ExtResource("2_4ffj5")]
 
