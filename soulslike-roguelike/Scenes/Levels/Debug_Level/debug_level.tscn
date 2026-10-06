@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwu1qbbbpr0ui"]
 
 [ext_resource type="Script" uid="uid://mpjhy21ybpfe" path="res://Scripts/Levels/Debug_Level/debug_level.gd" id="1_3ri1k"]
-[ext_resource type="Shader" uid="uid://boklsur1ubk6u" path="res://Shaders/debug/wireframe_debug.gdshader" id="3_ufrrj"]
+[ext_resource type="Shader" uid="uid://rt02l858e8jd" path="res://Shaders/debug/debug.gdshader" id="2_h7oiu"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_eed4v"]
 top_radius = 28.066406
@@ -10,9 +10,9 @@ height = 0.65771484
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7oiu"]
 render_priority = 0
-shader = ExtResource("3_ufrrj")
-shader_parameter/wire_color = Color(0, 1, 0, 1)
-shader_parameter/line_thickness = 0.02
+shader = ExtResource("2_h7oiu")
+shader_parameter/scale = 20.0
+shader_parameter/grey_scale = 0.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eed4v"]
 height = 0.99975586

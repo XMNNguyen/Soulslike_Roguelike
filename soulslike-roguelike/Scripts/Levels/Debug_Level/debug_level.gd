@@ -7,7 +7,7 @@ class_name DebugLevel
 
 
 func _ready() -> void:
-	debug_camera.make_current() #NOTE: uncomment for when testing camera
+	#debug_camera.make_current() #NOTE: uncomment for when testing camera
 	pass
 
 

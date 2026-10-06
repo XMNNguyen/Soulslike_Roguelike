@@ -12,6 +12,6 @@ script = ExtResource("1_5isc7")
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Pivot" unique_id=1412460164]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1985725044]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5562176, 1.9189181)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.538303, 4.906314)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Camera3D" unique_id=2081252035]
