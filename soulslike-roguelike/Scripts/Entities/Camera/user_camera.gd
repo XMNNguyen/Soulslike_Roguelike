@@ -20,6 +20,11 @@ var mouse_move : bool = false
 var mouse_idle : float = 0.0
 var mode := FREE
 
+# FOR MANUAL MODE
+var yaw : float = 0.0
+var pitch : float = 0.0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -57,6 +62,11 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_idle = 0.0
 		mouse_move = true
+		
+		# handle calculating yaw and pitch
+		yaw -= event.relative.x * sensitivity
+		pitch -= event.relative.y * sensitivity
+		pitch = clamp(pitch, -tilt_limit, tilt_limit)
 
 
 func get_camera() -> Camera3D:
