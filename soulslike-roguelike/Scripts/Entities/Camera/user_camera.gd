@@ -1,6 +1,7 @@
 extends BaseCamera
 class_name UserCamera
 
+enum {FREE, MOVE, LOCK}
 
 @onready var pivot : Node3D = $Pivot
 @onready var camera : Camera3D = $Camera3D
@@ -14,6 +15,7 @@ class_name UserCamera
 @export var look_speed : float = 30.0
 
 var previous_player_position : Vector3
+var mode := FREE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,15 +28,19 @@ func _ready() -> void:
 
 # Rotate the camera if moving left and right and then lerp camera to player if moving forward and backward
 func _physics_process(delta: float) -> void:
-	free_move(delta)
+	if mode == FREE:
+		free_move(delta)
+	elif mode == MOVE:
+		pass
+	else:
+		pass
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		pass
-		#spring_arm.rotation.x -= event.relative.y * sensitivity
-		#spring_arm.rotation.y -= event.relative.x * sensitivity
-		#spring_arm.rotation.x = clamp(spring_arm.rotation.x, -deg_to_rad(tilt_limit), deg_to_rad(tilt_limit))
+		mode = MOVE
+	elif:
+		mode = FREE
 
 
 func get_camera() -> Camera3D:
