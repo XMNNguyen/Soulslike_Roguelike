@@ -128,6 +128,15 @@ func _manual_move(delta: float) -> void:
 	
 	pivot.global_position = target.global_position
 	previous_player_position = target.global_position
+	
+	# calculate the angle offset and move the camera accordingly
+	var offset : Vector3 = pivot.global_position - camera.global_position
+	
+	offset = offset.rotated(Vector3.UP, yaw)
+	offset = offset.rotated(Vector3.RIGHT, pitch)
+	
+	camera.global_position = pivot.global_position + offset
+	camera.look_at(target.global_position)
 
 
 # HANDLES LOCK ON MODE
