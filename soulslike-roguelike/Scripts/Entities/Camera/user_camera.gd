@@ -48,9 +48,9 @@ func _physics_process(delta: float) -> void:
 	if mode == FREE:
 		_free_move(delta)
 	elif mode == MOVE:
-		pass
+		_manual_move(delta)
 	else:
-		pass
+		_lock_on_move(delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -81,8 +81,6 @@ func _free_move(delta: float) -> void:
 
 	# Forward/backward movement
 	var forward_distance := player_delta.dot(forward)
-
-	# Vertical movement
 	var vertical_distance := player_delta.y
 
 	camera.global_position += (
@@ -99,7 +97,27 @@ func _free_move(delta: float) -> void:
 
 # HANDLES MANUAL MOVEMENT MODE
 func _manual_move(delta: float) -> void:
-	pass
+	if target == null:
+		return
+
+	var forward := pivot.global_position - camera.global_position
+	forward.y = 0.0
+
+	if forward.length_squared() < 0.001:
+		return
+
+	forward = forward.normalized()
+	var player_delta := target.global_position - previous_player_position
+	var forward_distance := player_delta.dot(forward)
+	var vertical_distance := player_delta.y
+
+	camera.global_position += (
+		forward * forward_distance
+		+ Vector3.UP * vertical_distance
+	)
+	
+	pivot.global_position = target.global_position
+	previous_player_position = target.global_position
 
 
 # HANDLES LOCK ON MODE
