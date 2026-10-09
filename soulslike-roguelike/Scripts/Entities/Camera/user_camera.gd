@@ -64,8 +64,8 @@ func _input(event: InputEvent) -> void:
 		mouse_move = true
 		
 		# handle calculating yaw and pitch
-		yaw -= event.relative.x * sensitivity
-		pitch -= event.relative.y * sensitivity
+		yaw = event.relative.x * sensitivity
+		pitch = -event.relative.y * sensitivity
 		pitch = clamp(pitch, -tilt_limit, tilt_limit)
 
 
