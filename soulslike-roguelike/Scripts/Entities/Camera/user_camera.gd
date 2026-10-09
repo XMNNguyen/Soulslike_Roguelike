@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 	# handle different camera modes
 	if mode == FREE:
-		free_move(delta)
+		_free_move(delta)
 	elif mode == MOVE:
 		pass
 	else:
@@ -58,11 +58,13 @@ func _input(event: InputEvent) -> void:
 		mouse_idle = 0.0
 		mouse_move = true
 
+
 func get_camera() -> Camera3D:
 	return camera
 
 
-func free_move(delta: float) -> void:
+# HANDLES FREE CAMERA MODE
+func _free_move(delta: float) -> void:
 	if target == null:
 		return
 
@@ -83,7 +85,6 @@ func free_move(delta: float) -> void:
 	# Vertical movement
 	var vertical_distance := player_delta.y
 
-	# Move camera by exactly those two components
 	camera.global_position += (
 		forward * forward_distance
 		+ Vector3.UP * vertical_distance
@@ -94,3 +95,13 @@ func free_move(delta: float) -> void:
 	camera.look_at(target.global_position)
 
 	previous_player_position = target.global_position
+
+
+# HANDLES MANUAL MOVEMENT MODE
+func _manual_move(delta: float) -> void:
+	pass
+
+
+# HANDLES LOCK ON MODE
+func _lock_on_move(delta: float) -> void:
+	pass
