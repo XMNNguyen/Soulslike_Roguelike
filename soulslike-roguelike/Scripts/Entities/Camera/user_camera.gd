@@ -10,11 +10,14 @@ enum {FREE, MOVE, LOCK}
 @export var sensitivity : float = 0.01
 @export var tilt_limit : float = 70.0
 @export var camera_offset : float = 5.0
+@export var max_idle : float = 2.0
 
 @export var follow_speed : float = 60
 @export var look_speed : float = 30.0
 
 var previous_player_position : Vector3
+var mouse_move : bool = false
+var mouse_idle : float = 0.0
 var mode := FREE
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +31,20 @@ func _ready() -> void:
 
 # Rotate the camera if moving left and right and then lerp camera to player if moving forward and backward
 func _physics_process(delta: float) -> void:
+	# check for mouse idle time and change mode when idle for too long
+	if mouse_move:
+		mouse_idle = 0.0
+		mode = MOVE
+	else:
+		mouse_idle += delta
+	
+	mouse_move = false 
+	
+	if mouse_idle >= max_idle:
+		mode = FREE
+		mouse_move = false
+	
+	# handle different camera modes
 	if mode == FREE:
 		free_move(delta)
 	elif mode == MOVE:
@@ -38,10 +55,8 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		mode = MOVE
-	elif:
-		mode = FREE
-
+		mouse_idle = 0.0
+		mouse_move = true
 
 func get_camera() -> Camera3D:
 	return camera
